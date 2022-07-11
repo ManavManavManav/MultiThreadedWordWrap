@@ -1,0 +1,38 @@
+Objective
+The object of this code is to build on wordwrap. So that the while wrapping through directories, the program wrap all the subdirectories. 
+The program concurrently wraps using N wrapping threads for files and M threads concurrently travers through for directories and its
+subdirectories. 
+
+Scope
+The testing will be concentrated around threads evenly distributing load to wrap files and directories. If argument for thread is not
+present than one N and one M threads will do wrapping and directory traversal.  
+
+Test Plan
+While testing first thing we test if no arguments is present than the program correctly goes through each subdirectory and wraps the file
+while ignoring any files that start with "wrap." We plan to test concurrent wrapping of files and concurrent directory traversal to 
+increase efficiency. 
+
+First test: For the first test we did not pass in any argument for N threads and M threads. The objective of the program to use one N 
+threads for file wrapping while there should be one M thread that does all the directory traversal. We tested a directories and its 
+descendent directories are added to the queue as inted and one thread is wrapping all the files in the directories and its descendent 
+directories. We made enough subdirectories to check if the directory traversal is working as inted and not overloading. 
+
+Second test: For the second test we only passed in arguments for N threads and did not pass in any arugment for M threads. The objective 
+of this test is to make sure N threads concurrent wraps the files while distrubuting the load evenly to all the threads created. For this
+test we passed in less threads than files that will be queued. While testing instance where there is no arguments for M threads. Next, we 
+passed more threads than files that will be queued for wrapping. In this case, each file will be wrapped by a threads and extra threads 
+will wait for file wrapping. Last to test we passed exactly same amound of threads as amount of files that will be queued for wrapping. In
+this instance all threads should its corresponding file to wrap. 
+
+Third test: For the third test we passed in both N and M threads. The goal of this test is to make sure N threads concurrently wraps the
+file while M threads concurrently travers the directories. Both threads should evenly distribute the work load. Next, we 
+passed more threads than directories that will be queued for traversal. In this case, each directorly will be travers by a threads and 
+extra threads will wait for direcotry traversal to finish. Last to test we passed exactly same amound of threads as amount of directories 
+that will be queued for directory traversal. In this instance all threads should its corresponding directory to travers. The N threads
+should be work as inted to second test. We test directories and subdirectories while passing in with multiple N threads and M threads. 
+N threads wrap the file and M threads irrterates through the directories and subdirectories. 
+
+Bug Fix 
+While testing the program we are bound to find some bugs that makes program not run as inted. To fix the bugs best approach is to run gdb 
+on the program while putting breakpoint/breakpoints to pinpoint where the bug is occuring. After pinpointing the location of the bug we 
+thought of what is causing the problem and fixed the program to work as inted.
